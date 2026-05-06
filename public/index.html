@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XpenseLog — Daily Expense Tracker</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-icon"><i class="ti ti-wallet"></i></div>
+      <div>
+        <div class="brand-name">XpenseLog</div>
+        <div class="brand-tag">Daily Tracker</div>
+      </div>
+    </div>
+    <div class="date-badge" id="todayDate"></div>
+  </header>
+
+  <!-- SUMMARY CARDS -->
+  <div class="summary-grid">
+    <div class="stat income">
+      <label>Income</label>
+      <div class="val" id="totalIncome">₹0</div>
+      <i class="ti ti-trending-up bg-icon"></i>
+    </div>
+    <div class="stat expense">
+      <label>Expenses</label>
+      <div class="val" id="totalExpense">₹0</div>
+      <i class="ti ti-trending-down bg-icon"></i>
+    </div>
+    <div class="stat balance">
+      <label>Balance</label>
+      <div class="val" id="balance">₹0</div>
+      <i class="ti ti-scale bg-icon"></i>
+    </div>
+  </div>
+
+  <!-- ADD / EDIT TRANSACTION -->
+  <div class="panel" id="formPanel">
+    <div class="panel-title">Add Transaction</div>
+    <div class="type-row">
+      <button class="type-btn active-expense" id="btnExpense" onclick="setType('expense')">
+        <i class="ti ti-trending-down"></i> Expense
+      </button>
+      <button class="type-btn" id="btnIncome" onclick="setType('income')">
+        <i class="ti ti-trending-up"></i> Income
+      </button>
+    </div>
+    <div class="form-grid">
+      <div class="fg"><label>Description</label><input type="text" id="desc" placeholder="e.g. Lunch, Auto ride" /></div>
+      <div class="fg"><label>Amount (₹)</label><input type="number" id="amount" placeholder="0" min="0" /></div>
+    </div>
+    <div class="form-grid">
+      <div class="fg">
+        <label>Category</label>
+        <select id="category">
+          <!-- Populated dynamically via JS -->
+        </select>
+      </div>
+      <div class="fg"><label>Date</label><input type="date" id="date" /></div>
+    </div>
+    <div class="btn-group">
+      <button class="btn-add" id="btnSave" onclick="saveTransaction()">
+        <i class="ti ti-plus"></i> Add Transaction
+      </button>
+      <div id="cancelContainer" style="display: none; flex: 1;">
+        <button class="btn-cancel" onclick="cancelEdit()">
+          <i class="ti ti-x"></i> Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRANSACTIONS -->
+  <div class="panel">
+    <div class="panel-title">Transactions</div>
+    <div class="filter-row">
+      <select id="filterType" onchange="loadTransactions()">
+        <option value="all">All types</option>
+        <option value="expense">Expenses only</option>
+        <option value="income">Income only</option>
+      </select>
+      <select id="filterCat" onchange="loadTransactions()">
+        <!-- Populated dynamically via JS -->
+      </select>
+    </div>
+    <div class="tx-list" id="txList">
+      <div class="loading"><div class="spinner"></div> Loading...</div>
+    </div>
+  </div>
+
+  <!-- CHART -->
+  <div class="panel">
+    <div class="panel-title">Spending Breakdown</div>
+    <div class="bar-wrap" id="barChart"></div>
+  </div>
+
+  <div class="footer">Made with ❤️ · XpenseLog College Project</div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
