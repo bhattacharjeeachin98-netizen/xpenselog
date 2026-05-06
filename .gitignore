@@ -1,0 +1,4 @@
+node_modules/
+xpenselog.json
+.env
+.vercel

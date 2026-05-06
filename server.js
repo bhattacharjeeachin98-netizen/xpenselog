@@ -40,3 +40,6 @@ server.on('error', (err) => {
     console.error('❌ Server error:', err);
   }
 });
+
+// Export for Vercel serverless deployment
+module.exports = app;
